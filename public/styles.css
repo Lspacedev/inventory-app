@@ -31,6 +31,7 @@ h1 {
     padding: 0px;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     gap: 5px;
     list-style: none;
     background-color: whitesmoke;
@@ -38,7 +39,6 @@ h1 {
 }
 
 .movies li, .genres li, .studios li {
-    flex: 1;
     width: 200px;
     height: 250px;
 

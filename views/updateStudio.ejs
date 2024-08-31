@@ -9,12 +9,13 @@
 </head>
 <body>
     <%- include('header') %>
+    <%- include("partials/errors.ejs") %>
 
     <h1>Update Studio</h1>
     <form method="POST" action="/studios/<%= studioName %>/update">
-        <label for="studioNameUpdate">
+        <label for="studioName">
             Studio Name
-            <input type="text" id="studioNameUpdate" name="studioNameUpdate">
+            <input type="text" id="studioName" name="studioName">
         </label>
         <input type="submit" value="send">
      </form>

@@ -1,5 +1,18 @@
 const db = require("../db/queries");
 
+//validation
+const { body, validationResult } = require("express-validator");
+
+const alphaErr = "must only contain letters.";
+const lengthErr = "must be between 1 and 25 characters.";
+
+const validateGenre = [
+  body("genreName").trim()
+    .isAlpha().withMessage(`Genre Name ${alphaErr}`)
+    .isLength({ min: 1, max: 25 }).withMessage(`Genre Name ${lengthErr}`),
+];
+
+
 async function getGenres (req, res) {
     const genres = await db.getAllGenres();
    
@@ -17,13 +30,23 @@ async function createGenreGet(req, res) {
     res.render("genreForm", {genres: genres});
 }
 
-async function createGenrePost(req, res) {
+ const createGenrePost = [validateGenre, async(req, res) =>{
+    const errors = validationResult(req);
+    const genres = await db.getAllGenres();
+
+    if (!errors.isEmpty()) {
+        return res.status(400).render("genreForm", {
+          title: "Add genre",
+          errors: errors.array(),
+          genres: genres, 
+          
+        });
+      }
     const {genreName} = req.body;
-    console.log(genreName)
     await db.insertGenre(genreName)
     res.redirect("/");
     
-}
+}]
 
 async function updateGenreGet(req, res) {
     const {genreName} = req.params;
@@ -32,9 +55,19 @@ async function updateGenreGet(req, res) {
     res.render("updateGenre", {genreName: genreName});
 }
 
-async function updateGenrePost(req, res) {
+const updateGenrePost= [validateGenre, async(req, res) =>{
     const {genreName} = req.params;
-    const {genreNameUpdate} = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).render("updateGenre", {
+          title: "Update genre",
+          errors: errors.array(),
+          genreName:genreName
+        });
+      }
+  
+
+    const genreNameUpdate = req.body.genreName;
 
     const genres = await db.getAllGenres();
     const [genre] = genres.filter((genreObj)=> genreObj.genre_name == genreName);
@@ -42,7 +75,7 @@ async function updateGenrePost(req, res) {
   
     await db.updateGenre(genre.movie_genre_id, genName);
     res.redirect("/");
-}
+}]
 
 async function deleteGenreGet(req, res) {
     const {genreName} = req.params;

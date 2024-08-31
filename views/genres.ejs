@@ -7,7 +7,9 @@
   <body>
 
     <%- include('header') %>
-
+    <a href="/genres/add" >
+      <span>Add genre</span>
+    </a>
     <ul class="genres">
         <% genres.forEach((genre) => { %>
           <li><%= genre.genre_name %>

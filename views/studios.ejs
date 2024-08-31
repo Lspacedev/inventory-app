@@ -7,7 +7,9 @@
   </head>
   <body>
     <%- include('header') %>
-
+    <a href="/studios/add" >
+      <span>Add studio</span>
+    </a>
     <ul class="studios">
         <% studios.forEach((studio) => { %>
           <li><%= studio.studio_name %>

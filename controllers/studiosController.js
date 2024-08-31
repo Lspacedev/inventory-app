@@ -1,4 +1,15 @@
 const db = require("../db/queries");
+const { body, validationResult } = require("express-validator");
+
+const alphaErr = "must only contain letters.";
+const lengthErr = "must be between 1 and 25 characters.";
+
+const validateStudio = [
+  body("studioName").trim()
+    .isAlpha().withMessage(`Studio Name ${alphaErr}`)
+    .isLength({ min: 1, max: 25 }).withMessage(`Studio Name ${lengthErr}`),
+];
+
 
 async function getStudios (req, res) {
     const studios = await db.getAllStudios();
@@ -20,12 +31,23 @@ async function createStudioGet(req, res) {
     res.render("studioForm", {studios: studios});
 }
 
-async function createStudioPost(req, res) {
+const createStudioPost = [validateStudio, async(req, res)=> {
+    const errors = validationResult(req);
+    const studios = await db.getAllStudios();
+        
+    if (!errors.isEmpty()) {
+        return res.status(400).render("studioForm", {
+          title: "Create studio",
+          errors: errors.array(),
+          studios: studios
+        });
+      }
+
     const {studioName} = req.body;
     await db.insertStudio(studioName)
     res.redirect("/");
     
-}
+}]
 
 async function updateStudioGet(req, res) {
     const {studioName} = req.params;
@@ -34,9 +56,19 @@ async function updateStudioGet(req, res) {
     res.render("updateStudio", {studioName: studioName});
 }
 
-async function updateStudioPost(req, res) {
+const updateStudioPost = [validateStudio, async(req, res) =>{
     const {studioName} = req.params;
-    const {studioNameUpdate} = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).render("updateStudio", {
+          title: "Update studio",
+          errors: errors.array(),
+          studioName: studioName
+          
+        });
+      }
+    const studioNameUpdate = req.body.studioName;
 
     const studios = await db.getAllStudios();
     const [studio] = studios.filter((studioObj)=> studioObj.studio_name == studioName);
@@ -44,7 +76,7 @@ async function updateStudioPost(req, res) {
   
     await db.updateStudio(studio.studio_id, stuName);
     res.redirect("/");
-}
+}];
 
 async function deleteStudioGet(req, res) {
     const {studioName} = req.params;

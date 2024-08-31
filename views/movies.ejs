@@ -7,7 +7,9 @@
   </head>
   <body>
     <%- include('header') %>
-
+    <a href="/movies/add" >
+      <span>Add movie</span>
+    </a>
     <ul class="movies">
         <% movies.forEach((movie) => { %>
           <li><%= movie.title %>
