@@ -1,0 +1,24 @@
+<!-- studios.ejs -->
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>Studios</title>
+  </head>
+  <body>
+    <%- include('header') %>
+
+    <ul class="studios">
+        <% studios.forEach((studio) => { %>
+          <li><%= studio.studio_name %>
+            <a href="/studios/<%= studio.studio_name %>" >
+              <span>open</span>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+      
+  </body>
+
+
+</html>

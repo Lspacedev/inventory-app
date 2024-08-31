@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>New Studio</title>
+</head>
+<body>
+    <%- include('header') %>
+
+    <h1>New Studio</h1>
+    <form method="POST" action="/studios/add">
+        <label for="studioName">
+            Studio Name
+            <input type="text" id="studioName" name="studioName">
+        </label>
+        <input type="submit" value="send">
+     </form>
+</body>
+</html>

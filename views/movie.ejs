@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css">
+    <title>Movie</title>
+    
+
+  </head>
+  <body>
+    <%- include('header') %>
+
+    <title><%= title %></title>
+    <div class="update-delete">
+      <a href="/movies/<%= movie.movie_id %>/update" >
+        <span>update</span>
+      </a>
+      <a href="/movies/<%= movie.movie_id %>/delete" >
+        <span>delete</span>
+      </a>
+    </div>
+    <div class="movie-container">
+      <div class="movie-card">
+        <div><%= movie.title %></div>
+        <div><%= movie.genre_name %></div>
+        <div><%= movie.studio_name %></div>
+  
+      </div>
+    </div>
+  </body>
+
+</html>

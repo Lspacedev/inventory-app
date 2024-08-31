@@ -1,0 +1,75 @@
+* {
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+header {
+    display: flex;
+    justify-content: space-around;
+    background-color: #bcc;
+    margin: 0px;
+}
+
+nav ul {
+    display:  flex;
+    gap: 5px;
+    list-style: none;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    text-align: center;
+}
+
+.movies, .genres, .studios {
+    padding: 0px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+    list-style: none;
+    background-color: whitesmoke;
+
+}
+
+.movies li, .genres li, .studios li {
+    flex: 1;
+    width: 200px;
+    height: 250px;
+
+    text-align: center;
+
+    box-shadow: 1px 1px 5px #bbb;
+    background-color: white;
+
+    
+}
+
+.movie-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+.movie-card {
+    width: 250px;
+    height: 350px;
+    box-shadow: 1px 1px 5px #bbb;
+    background-color: white;
+
+    text-align: center;
+
+}
+
+form {
+    text-align: center;
+}
+
+.update-delete {
+    text-align: end;
+}

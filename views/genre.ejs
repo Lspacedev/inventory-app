@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css">
+    <title>Genre</title>
+
+  </head>
+  <body>
+    <%- include('header') %>
+
+    <div class="update-delete">
+      <a href="/genres/<%= genreName %>/update" >
+        <span>update</span>
+      </a>
+      <a href="/genres/<%= genreName %>/delete" >
+        <span>delete</span>
+      </a>
+   
+    </div>
+
+    <ul class="movies">
+        <% genreMovies.forEach((movie) => { %>
+          <li><%= movie.title %>
+          <a href="/movies/<%=movie.movie_id%>" >
+            <span>open</span>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+  
+  </body>
+
+</html>

@@ -1,0 +1,24 @@
+<!-- index.ejs -->
+<html>
+  <head>
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>Movies</title>
+  </head>
+  <body>
+    <%- include('header') %>
+
+    <ul class="movies">
+        <% movies.forEach((movie) => { %>
+          <li><%= movie.title %>
+          <a href="/movies/<%= movie.movie_id %>"" >
+            <span>open</span>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+      
+  </body>
+
+
+</html>
